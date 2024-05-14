@@ -93,6 +93,10 @@
     vimAlias = true;
   };
 
+  # This is saddly a must
+  environment.variables.EDITOR = "nvim";
+  environment.variables.VISUAL = "nvim";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;

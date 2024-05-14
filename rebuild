@@ -1,0 +1,45 @@
+#! /usr/bin/env bash
+
+# Script for quickly and effectively rebuilding Nixos, with git tracking
+
+# Exit on error
+set -e
+# Verbose mode
+set -v
+# Priviledged mode
+set -p
+
+# Edit current config
+$EDITOR configuration.nix
+
+# cd to the config dir
+pushd /etc/nixos/
+
+# If no changes were made, exit
+if git diff --quiet '*.nix'; then
+    echo "No changes were detected. Exiting..."
+    popd
+    exit 0
+fi
+
+# Maybe implement code style check in the future
+
+# Show changes made
+git diff -U0 '*.nix'
+
+echo "Rebuilding NixOS..."
+
+# Rebuild with showing just errors on fail
+sudo nixos-rebuild switch &> nixos-rebuild.log || (cat nixos-rebuild.log | grep --color error && exit 1)
+
+# Current generation
+current=$(nixos-rebuild list-generations | grep current)
+
+# Commit changes
+git commit -am "$current"
+
+# Go back
+popd
+
+echo "Rebuild finished!"
+
