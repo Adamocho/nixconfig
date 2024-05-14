@@ -12,7 +12,7 @@
 
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-  boot.kernelParams = ["quiet"];
+  boot.kernelParams = ["quiet"]; # Is this optional?
 
   boot.initrd.luks.devices."luks-0490d2ff-d1d3-4149-b887-0c79f72d299a".device = "/dev/disk/by-uuid/0490d2ff-d1d3-4149-b887-0c79f72d299a";
   networking.hostName = "earth";
