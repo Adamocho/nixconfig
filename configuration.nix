@@ -8,7 +8,6 @@
   imports =
     [ # Hardware scan
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -94,13 +93,6 @@
     #  thunderbird
     ];
   };
-
- # home-manager = {
- #   extraSpecialArgs = { inherit inputs; };
- #   users = {
- #     "adam" = import ./home.nix;
- #   };
- # };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
