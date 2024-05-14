@@ -188,7 +188,11 @@
     )
     dunst # notification daemon
     libnotify # notification display program
-    wbg # wallpaper
+    # wallpaper
+    (wbg.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dpng=enabled" "-Djpeg=enabled" "-Dwebp=enabled" ];
+      })
+    )
     bemenu # dmenu for wayland
     firefox # browser
     alacritty # terminal
