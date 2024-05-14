@@ -2,12 +2,10 @@
 
 # Script for quickly and effectively rebuilding Nixos, with git tracking
 
+# Maybe implement code style check in the future
+
 # Exit on error
 set -e
-# Verbose mode
-set -v
-# Priviledged mode
-set -p
 
 # Edit current config
 $EDITOR configuration.nix
@@ -21,8 +19,6 @@ if git diff --quiet '*.nix'; then
     popd
     exit 0
 fi
-
-# Maybe implement code style check in the future
 
 # Show changes made
 git diff -U0 '*.nix'
