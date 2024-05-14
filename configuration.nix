@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
@@ -16,11 +12,12 @@
 
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-  boot.kernelParams = ["quiet"]; # Pretty sure this one's optional.
+  boot.kernelParams = ["quiet"];
 
   boot.initrd.luks.devices."luks-0490d2ff-d1d3-4149-b887-0c79f72d299a".device = "/dev/disk/by-uuid/0490d2ff-d1d3-4149-b887-0c79f72d299a";
   networking.hostName = "earth";
 
+  # For the SSD
   services.fstrim.enable = true;
 
   # Enable networking.
@@ -83,16 +80,80 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Manpages
+  documentation.enable = true;
+  documentation.dev.enable = true;
+  documentation.man.enable = true;
+  documentation.man.generateCaches = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+
+      # Browsers.
       firefox
-    #  thunderbird
+      # chromium
+
+      # Editors.
+      vim
+      neovim
+      vscodium
+
+      # Desktop aplications.
+      obsidian
+      # audacity
+      # wireshark
+      # gimp
+      # vlc
+      # blender
+      # filezilla
+      # krita
+
+      # Terminals.
+      alacritty
+
+      # Fonts
+      fira-code
+      source-code-pro
+
+      # Terminal tools && just tools.
+      coreutils
+      htop
+      plocate
+      tree
+      wget
+      curl
+      git
+      zsh
+      cron
+      binwalk
+      strace
+      ltrace
+      tmux
+      openssh
+      # Special rust tools
+      bat
+      ripgrep
+      bacon
+      du-dust
+
+      # Programming.
+      rustup
+      rust-analyzer
+      python3
+
+      # Style points.
+      neofetch
     ];
   };
+
+  # Nix is upset about this
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -101,9 +162,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-    git
-    neovim
-    neofetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -118,12 +176,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Manpages
-  documentation.enable = true;
-  documentation.dev.enable = true;
-  documentation.man.enable = true;
-  documentation.man.generateCaches = true;
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
