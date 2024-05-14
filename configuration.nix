@@ -112,10 +112,6 @@
     nvidia.modesetting.enable = true;
   };
 
-  # For desktop portals
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
