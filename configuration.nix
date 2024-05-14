@@ -86,6 +86,13 @@
   documentation.man.enable = true;
   documentation.man.generateCaches = true;
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
@@ -98,8 +105,6 @@
       # chromium
 
       # Editors.
-      vim
-      neovim
       vscodium
 
       # Desktop aplications.
@@ -117,6 +122,7 @@
 
       # Fonts
       fira-code
+      fira-code-symbols
       source-code-pro
 
       # Terminal tools && just tools.
@@ -153,6 +159,12 @@
   # Nix is upset about this
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+  ];
+
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    source-code-pro
   ];
 
   # Allow unfree packages

@@ -125,9 +125,32 @@ Just place them inside the `packages = with pkgs; [` array
 +  ];
 ```
 
-### Ricing
+### Setting font
 
-To be continued...
+1. Install with `packages = with pkgs; [`
+
+2. Then, make it available for system applications
+
+```nix
+# configuration.nix
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    source-code-pro
+  ];
+```
+
+Rebuild.
+
+### Novim as the default editor
+
+```nix
+# configuration.nix
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+```
 
 ## Good to know
 
