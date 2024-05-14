@@ -93,6 +93,28 @@
   # This is saddly a must
   environment.variables.EDITOR = "nvim";
   environment.variables.VISUAL = "nvim";
+  
+  # Wayland wm
+  programs.river.enable = true;
+
+  # For window managers
+  # F*** you nvidia - Linus
+  environment.sessionVariables = {
+    # Against invisible cursors
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Nvidia wayland config continuation
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+
+  # For desktop portals
+  #xdg.portal.enable = true;
+  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
@@ -100,10 +122,6 @@
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-
-      # Browsers.
-      firefox
-      # chromium
 
       # Editors.
       vscodium
@@ -117,14 +135,6 @@
       # blender
       # filezilla
       # krita
-
-      # Terminals.
-      alacritty
-
-      # Fonts
-      fira-code
-      fira-code-symbols
-      source-code-pro
 
       # Terminal tools && just tools.
       coreutils
@@ -175,6 +185,22 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+
+    (waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+    dunst # notification daemon
+    libnotify # notification display program
+    wbg # wallpaper
+    bemenu # dmenu for wayland
+    firefox # browser
+    alacritty # terminal
+    networkmanagerapplet # guess :)
+    # Fonts
+    fira-code
+    fira-code-symbols
+    source-code-pro
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
