@@ -94,29 +94,6 @@
   environment.variables.EDITOR = "nvim";
   environment.variables.VISUAL = "nvim";
   
-  # Wayland wm
-  #programs.river.enable = true;
-  programs.hyprland = {
-    enable = true;
-    nvidiaPatches = true;
-    xwayland.enable = true;
-  };
-
-  # For window managers
-  # F*** you nvidia - Linus
-  environment.sessionVariables = {
-    # Against invisible cursors
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
-
-  # Nvidia wayland config continuation
-  hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
@@ -182,6 +159,32 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Desktop config
+  programs.river.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true;
+    xwayland.enable = true;
+  };
+
+  # For window managers
+  # F*** you nvidia - Linus
+  environment.sessionVariables = {
+    # Against invisible cursors
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Nvidia wayland config continuation
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -198,10 +201,7 @@
       })
     )
     bemenu # dmenu for wayland
-    wofi
-    rofi-wayland
     firefox # browser
-    kitty # for now (hyprland default terminal)
     alacritty # terminal
     networkmanagerapplet # guess :)
     # Fonts
