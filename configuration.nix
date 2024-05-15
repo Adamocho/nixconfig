@@ -95,7 +95,12 @@
   environment.variables.VISUAL = "nvim";
   
   # Wayland wm
-  programs.river.enable = true;
+  #programs.river.enable = true;
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true;
+    xwayland.enable = true;
+  };
 
   # For window managers
   # F*** you nvidia - Linus
