@@ -186,7 +186,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-
     (waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       })
@@ -200,6 +199,7 @@
     )
     bemenu # dmenu for wayland
     firefox # browser
+    kitty # for now (hyprland default terminal)
     alacritty # terminal
     networkmanagerapplet # guess :)
     # Fonts
