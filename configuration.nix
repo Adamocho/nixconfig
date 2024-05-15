@@ -198,6 +198,8 @@
       })
     )
     bemenu # dmenu for wayland
+    wofi
+    rofi-wayland
     firefox # browser
     kitty # for now (hyprland default terminal)
     alacritty # terminal
