@@ -43,11 +43,13 @@
   # X11
   services.xserver.enable = true;
   # Wayland
-  # services.wayland.enable = true;
+  #services.wayland.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+  # For river 
+  services.xserver.displayManager.sessionPackages = [ pkgs.river ];
 
   # Configure keymap in X11
   services.xserver = {
@@ -93,17 +95,13 @@
   # This is saddly a must
   environment.variables.EDITOR = "nvim";
   environment.variables.VISUAL = "nvim";
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-
-      # Browsers.
-      firefox
-      # chromium
 
       # Editors.
       vscodium
@@ -117,14 +115,6 @@
       # blender
       # filezilla
       # krita
-
-      # Terminals.
-      alacritty
-
-      # Fonts
-      fira-code
-      fira-code-symbols
-      source-code-pro
 
       # Terminal tools && just tools.
       coreutils
@@ -171,10 +161,59 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Desktop config
+  programs.river.enable = true;
+
+ # programs.hyprland = {
+ #   enable = true;
+ #   nvidiaPatches = true;
+ #   xwayland.enable = true;
+ # };
+
+  # For window managers
+  # F*** you nvidia - Linus
+  environment.sessionVariables = {
+    # Against invisible cursors
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Nvidia wayland config continuation
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+
+  # Portals
+  xdg.portal.enable = true;
+  xdg.portal.wlr.enable = true;
+  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
+    (waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+    dunst # notification daemon
+    libnotify # notification display program
+    # wallpaper
+    (wbg.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dpng=enabled" "-Djpeg=enabled" "-Dwebp=enabled" ];
+      })
+    )
+    bemenu # dmenu for wayland
+    firefox # browser
+    alacritty # terminal
+    networkmanagerapplet # guess :)
+    # Fonts
+    fira-code
+    fira-code-symbols
+    source-code-pro
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
