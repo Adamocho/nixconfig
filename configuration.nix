@@ -164,14 +164,8 @@
   # Desktop config
   programs.river.enable = true;
 
- # programs.hyprland = {
- #   enable = true;
- #   nvidiaPatches = true;
- #   xwayland.enable = true;
- # };
-
   # For window managers
-  # F*** you nvidia - Linus
+  # F*** you Nvidia - Linus
   environment.sessionVariables = {
     # Against invisible cursors
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -188,8 +182,8 @@
   # Portals
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
+  # Doesnt work - package conflict
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
