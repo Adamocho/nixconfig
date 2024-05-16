@@ -174,3 +174,96 @@ nix flake update
 ...to update flake's dependencies and packages
 
 
+## Installing and setting up river (wayland wm)
+
+Enable river in `configuration.nix` and install additional stuff
+```nix
+  # For river 
+  services.xserver.displayManager.sessionPackages = [ pkgs.river ];
+
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "pl";
+    xkbVariant = "";
+  };
+
+  # Configure console keymap
+  console.keyMap = "pl2";
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+    # IN THE SAME FILE
+
+  # Desktop config
+  programs.river.enable = true;
+
+  # For window managers
+  # F*** you Nvidia - Linus
+  environment.sessionVariables = {
+    # Against invisible cursors
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Nvidia wayland config continuation
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+
+  # Portals
+  xdg.portal.enable = true;
+  xdg.portal.wlr.enable = true;
+  # Doesnt work - package conflict
+  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim
+    (waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+    dunst # notification daemon
+    libnotify # notification display program
+    # wallpaper
+    (wbg.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dpng=enabled" "-Djpeg=enabled" "-Dwebp=enabled" ];
+      })
+    )
+    bemenu # dmenu for wayland
+    firefox # browser
+    alacritty # terminal
+    networkmanagerapplet # guess :)
+    # Fonts
+    fira-code
+    fira-code-symbols
+    source-code-pro
+  ];
+```
+
+Disable GNOME (it has conflicting packages).
+It solved the issue in my case.
+```diff
+  services.xserver.displayManager.gdm.enable = true;
+-  services.xserver.desktopManager.gnome.enable = true;
++  # services.xserver.desktopManager.gnome.enable = true;
+```
+
+Rebuild. Test. Rollback, should you need it.
+
