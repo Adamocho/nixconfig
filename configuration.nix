@@ -43,11 +43,11 @@
   # X11
   services.xserver.enable = true;
   # Wayland
-  # services.wayland.enable = true;
+  #services.wayland.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
   # For river 
   services.xserver.displayManager.sessionPackages = [ pkgs.river ];
 
