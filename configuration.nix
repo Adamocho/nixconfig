@@ -131,6 +131,8 @@
       ltrace
       tmux
       openssh
+      killall
+
       # Special rust tools
       bat
       ripgrep
@@ -156,6 +158,7 @@
     fira-code
     fira-code-symbols
     source-code-pro
+    font-awesome
   ];
 
   # Allow unfree packages
@@ -208,6 +211,11 @@
     fira-code
     fira-code-symbols
     source-code-pro
+    font-awesome
+    
+    # File manager
+    gnome.nautilus
+    rox-filer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
