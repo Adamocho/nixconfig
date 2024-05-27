@@ -136,6 +136,11 @@
       ripgrep
       bacon
       du-dust
+      ncspot
+      rtx
+      porsmo
+      wiki-tui
+      speedtest-rs
 
       # Programming.
       rustup
