@@ -39,6 +39,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Enable dynamic-link libraries...
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
   # Enable windowing systems.
   # X11
   services.xserver.enable = true;
