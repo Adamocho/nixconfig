@@ -26,7 +26,7 @@ git diff -U0 '*.nix'
 echo "Rebuilding NixOS..."
 
 # Rebuild with showing just errors on fail
-sudo nixos-rebuild switch &> nixos-rebuild.log || (cat nixos-rebuild.log | grep --color error && exit 1)
+sudo nixos-rebuild switch &> nixos-rebuild.log || (cat nixos-rebuild.log | grep --color error && notify-send " Buggy rebuild" "Rebuild failed. Fix your code!"  && exit 1)
 
 # Current generation
 current=$(nixos-rebuild list-generations | grep current)
@@ -38,4 +38,5 @@ git commit -am "$current"
 popd
 
 echo "Rebuild finished!"
+notify-send " Rebuild finished" "Last rebuild was carried out successfully!"
 
