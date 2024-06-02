@@ -155,6 +155,7 @@
       rustup
       rust-analyzer
       python3
+      ghc
 
       # Style points.
       neofetch
