@@ -39,6 +39,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Enable dynamic-link libraries...
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    stdenv.cc.cc.lib
+  ];
+
   # Enable windowing systems.
   # X11
   services.xserver.enable = true;
@@ -102,7 +110,6 @@
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-
       # Editors.
       vscodium
 
@@ -138,6 +145,11 @@
       ripgrep
       bacon
       du-dust
+      ncspot
+      rtx
+      porsmo
+      wiki-tui
+      speedtest-rs
 
       # Programming.
       rustup
