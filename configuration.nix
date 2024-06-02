@@ -44,10 +44,7 @@
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
-<<<<<<< HEAD
-=======
     stdenv.cc.cc.lib
->>>>>>> b0621b824a34fb11307d2c1646f92cd42bc25280
   ];
 
   # Enable windowing systems.
