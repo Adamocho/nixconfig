@@ -72,7 +72,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  sound.enable = false;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -80,11 +80,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    jack.enable = false;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+    wireplumber.enable = true;
   };
 
   # Manpages
@@ -100,9 +101,6 @@
     vimAlias = true;
   };
 
-  # This is saddly a must
-  environment.variables.EDITOR = "nvim";
-  environment.variables.VISUAL = "nvim";
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
@@ -114,7 +112,11 @@
       vscodium
 
       # Desktop aplications.
-      obsidian
+      (obsidian.overrideAttrs (old: rec {
+          version = "1.4.16";
+      	  name = "obsidian-${version}";
+      	})
+      )
       # audacity
       # wireshark
       # gimp
@@ -139,6 +141,7 @@
       tmux
       openssh
       killall
+      stow
 
       # Special rust tools
       bat
@@ -183,10 +186,20 @@
   # For window managers
   # F*** you Nvidia - Linus
   environment.sessionVariables = {
+
     # Against invisible cursors
-    WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_NO_HARDWARE_CURSORS = 1;
+
     # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = 1;
+
+    # This is saddly a must
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+
+    # Firefox please work!
+    XDG_CURRENT_DESKTOP = "river";
+    MOZ_ENABLE_WAYLAND = 1;
   };
 
   # Nvidia wayland config continuation
@@ -247,7 +260,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-  
+  system.autoUpgrade.enable = true; 
+
   # Turn flakes on
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
