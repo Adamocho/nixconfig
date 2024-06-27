@@ -76,37 +76,21 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-<<<<<<< Updated upstream
-  sound.enable = false;
+  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    socketActivation = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = false;
-=======
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    #socketActivation = true;
-    #alsa.enable = true;
-    #alsa.support32Bit = true;
-    #pulse.enable = true;
-    #jack.enable = true;
->>>>>>> Stashed changes
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-<<<<<<< Updated upstream
-    wireplumber.enable = true;
-=======
     #wireplumber.enable = true;
->>>>>>> Stashed changes
   };
 
   # Manpages
@@ -133,11 +117,13 @@
       vscodium
 
       # Desktop aplications.
-      (obsidian.overrideAttrs (old: rec {
-          version = "1.4.16";
-      	  name = "obsidian-${version}";
-      	})
-      )
+      #(obsidian.overrideAttrs (old: rec {
+      #    version = "1.4.16";
+      #	  name = "obsidian-${version}";
+      #	})
+      #)
+      obsidian
+
       # audacity
       # wireshark
       # gimp
@@ -163,10 +149,7 @@
       openssh
       killall
       stow
-<<<<<<< Updated upstream
-=======
       pavucontrol
->>>>>>> Stashed changes
 
       # Special rust tools
       bat
@@ -191,9 +174,9 @@
   };
 
   # Nix is upset about this
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
+  #nixpkgs.config.permittedInsecurePackages = [
+  #  "electron-25.9.0"
+  #];
 
   fonts.packages = with pkgs; [
     fira-code
@@ -217,10 +200,6 @@
     WLR_NO_HARDWARE_CURSORS = 1;
 
     # Hint electron apps to use wayland
-<<<<<<< Updated upstream
-=======
-    # Turn off for now
->>>>>>> Stashed changes
     NIXOS_OZONE_WL = 1;
 
     # This is saddly a must
@@ -239,31 +218,24 @@
   };
 
   # Portals
-  xdg.portal.enable = true;
-  xdg.portal.wlr.enable = true;
+  #xdg.portal.enable = true;
+  #xdg.portal.wlr.enable = true;
   # Doesnt work - package conflict
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   #xdg.portal.xdgOpenUsePortal = true;
 
-#  xdg.portal = {
-#    enable = true;
-#    extraPortals = with pkgs; [
-#      xdg-desktop-portal-wlr
-#      xdg-desktop-portal-kde
-#      xdg-desktop-portal-gtk
-#    ];
-#    wlr = {
-#      enable = true;
-#        settings = { # uninteresting for this problem, for completeness only
-#          screencast = {
-#      #     output_name = "eDP-1";
-#      #     max_fps = 30;
-#           chooser_type = "default";
-#           #chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-#        };
-#      };
-#    };
-#  };
+  xdg.portal = {
+    enable = true;
+    wlr = {
+      enable = true;
+        settings = {
+          screencast = {
+           chooser_type = "simple";
+           #chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+        };
+      };
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
