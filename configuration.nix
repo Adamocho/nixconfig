@@ -99,13 +99,6 @@
   documentation.man.enable = true;
   documentation.man.generateCaches = true;
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
@@ -167,16 +160,23 @@
       rust-analyzer
       python3
       ghc
+	  pkg-config
 
       # Style points.
       neofetch
+
+	  # For neovim-treesitter
+      vimPlugins.nvim-treesitter.withAllGrammars
+	  tree-sitter
     ];
   };
 
-  # Nix is upset about this
-  #nixpkgs.config.permittedInsecurePackages = [
-  #  "electron-25.9.0"
-  #];
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   fonts.packages = with pkgs; [
     fira-code
@@ -200,7 +200,7 @@
     WLR_NO_HARDWARE_CURSORS = 1;
 
     # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = 1;
+    NIXOS_OZONE_WL = 0;
 
     # This is saddly a must
     EDITOR = "nvim";
@@ -231,7 +231,7 @@
         settings = {
           screencast = {
            chooser_type = "simple";
-           #chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+           chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
         };
       };
     };
@@ -240,6 +240,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+  	clang
+	nodejs_22
     vim
     (waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
