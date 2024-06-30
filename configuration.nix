@@ -56,6 +56,10 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   #services.xserver.desktopManager.gnome.enable = true;
+
+  # Enable XFCE
+  services.xserver.desktopManager.xfce.enable = true;
+
   # For river 
   services.xserver.displayManager.sessionPackages = [ pkgs.river ];
 
@@ -117,6 +121,7 @@
       #)
       obsidian
 
+      # Do not delete those. Uncomment when needed.
       # audacity
       # wireshark
       # gimp
@@ -126,6 +131,7 @@
       # krita
 
       # Terminal tools && just tools.
+      gnumake
       coreutils
       htop
       plocate
@@ -143,8 +149,9 @@
       killall
       stow
       pavucontrol
+      unzip
 
-      # Special rust tools
+      # Special rust tools.
       bat
       ripgrep
       bacon
@@ -161,6 +168,7 @@
       python3
       ghc
 	  pkg-config
+	  nodejs_22
 
       # Style points.
       neofetch
@@ -217,13 +225,6 @@
     nvidia.modesetting.enable = true;
   };
 
-  # Portals
-  #xdg.portal.enable = true;
-  #xdg.portal.wlr.enable = true;
-  # Doesnt work - package conflict
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  #xdg.portal.xdgOpenUsePortal = true;
-
   xdg.portal = {
     enable = true;
     wlr = {
@@ -241,8 +242,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   	clang
-	nodejs_22
     vim
+
+    # Things needed for a river desktop session (enabled for all users)
     (waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
       })
@@ -257,7 +259,8 @@
     bemenu # dmenu for wayland
     firefox # browser
     alacritty # terminal
-    networkmanagerapplet # guess :)
+    networkmanagerapplet # please guess :)
+
     # Fonts
     fira-code
     fira-code-symbols
@@ -267,6 +270,9 @@
     # File manager
     gnome.nautilus
     rox-filer
+
+    # Printer management
+    system-config-printer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
