@@ -13,6 +13,7 @@
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.kernelParams = ["quiet"]; # Is this optional?
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.luks.devices."luks-0490d2ff-d1d3-4149-b887-0c79f72d299a".device = "/dev/disk/by-uuid/0490d2ff-d1d3-4149-b887-0c79f72d299a";
   networking.hostName = "earth";
@@ -55,7 +56,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Enable XFCE
   services.xserver.desktopManager.xfce.enable = true;
@@ -139,7 +140,6 @@
       wget
       curl
       git
-      zsh
       cron
       binwalk
       strace
@@ -178,6 +178,8 @@
 	  tree-sitter
     ];
   };
+
+  programs.zsh.enable = true;
 
   programs.neovim = {
     enable = true;
