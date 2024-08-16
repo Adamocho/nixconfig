@@ -51,7 +51,7 @@
   # Enable windowing systems.
   # X11
   services.xserver.enable = true;
-  # X Wayland
+  #X Wayland
   #services.xwayland.enable = true;
 
   # Enable the GNOME Desktop Environment.
@@ -59,19 +59,20 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable XFCE
-  services.xserver.desktopManager.xfce.enable = true;
+  #services.xserver.desktopManager.xfce.enable = true;
 
   # For river 
-  services.xserver.displayManager.sessionPackages = [ pkgs.river ];
+  services.displayManager.sessionPackages = [ pkgs.river ];
 
   # Second WM
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
+
   programs.waybar.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "pl";
-    xkbVariant = "";
+    xkb.layout = "pl";
+    xkb.variant = "";
   };
 
   # Configure console keymap
@@ -229,14 +230,17 @@
 
   xdg.portal = {
     enable = true;
+    extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+    ];
     wlr = {
       enable = true;
-        settings = {
-          screencast = {
-           chooser_type = "simple";
-           chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-        };
-      };
+      #   settings = {
+      #     screencast = {
+      #      chooser_type = "simple";
+      #      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+      #   };
+      # };
     };
   };
 
@@ -271,10 +275,10 @@
     
     # File manager
     gnome.nautilus
-    rox-filer
+    #rox-filer
 
     # Printer management
-    system-config-printer
+    #system-config-printer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
