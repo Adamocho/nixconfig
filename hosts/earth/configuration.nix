@@ -211,7 +211,7 @@
     WLR_NO_HARDWARE_CURSORS = 1;
 
     # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = 0;
+    # NIXOS_OZONE_WL = 0;
 
     # This is saddly a must
     EDITOR = "nvim";
