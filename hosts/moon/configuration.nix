@@ -89,21 +89,26 @@
   documentation.man.enable = true;
   documentation.man.generateCaches = true;
 
+  # Shell
+  programs.zsh.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       # Applications
       vscodium
       obsidian
-      #gimp
+      gimp
       #vlc
       #blender
-      #audacity
+      audacity
       #filezilla
       #krita
+      discord
 
       # Editors
       alacritty
