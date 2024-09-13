@@ -180,7 +180,14 @@
     libgcc
     #ghc
     #pkg-config
-    #nodejs_22
+    nodejs_22
+
+    # For neovim-treesitter
+    vimPlugins.nvim-treesitter.withAllGrammars
+    tree-sitter
+
+    # DE Gnome better looks
+    gnome.gnome-tweaks
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
