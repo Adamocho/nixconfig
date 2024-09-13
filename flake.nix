@@ -1,5 +1,5 @@
 {
- description = "machines' nixos config";
+ description = "my nixos config";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
@@ -15,13 +15,13 @@
         ];
       };
 
-      # moon = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   specialArgs = { inherit inputs; };
-      #   modules = [ 
-      #     ./hosts/moon/configuration.nix
-      #   ];
-      # };
+      moon = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [ 
+          ./hosts/moon/configuration.nix
+        ];
+      };
     };
 
   };
