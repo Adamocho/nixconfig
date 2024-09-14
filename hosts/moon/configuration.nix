@@ -13,8 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.plymouth.enable = true;
-  #boot.kernelParams = ["quiet"]; # Is this optional?
+
   boot.initrd.luks.devices."luks-eab86c67-aed2-4de4-acf8-0d7011cca2d6".device = "/dev/disk/by-uuid/eab86c67-aed2-4de4-acf8-0d7011cca2d6";
   networking.hostName = "moon"; # Define your hostname.
 
