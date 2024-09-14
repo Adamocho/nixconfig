@@ -142,7 +142,7 @@ Just place them inside the `packages = with pkgs; [` array
 
 Rebuild.
 
-### Novim as the default editor
+### Neovim as the default editor
 
 ```nix
 # configuration.nix
@@ -267,3 +267,45 @@ It solved the issue in my case.
 
 Rebuild. Test. Rollback, should you need it.
 
+
+## Laptop setup
+
+This section is dedicated to setting up Nixos on a Framework 13 Laptop
+
+### Nixos configuration file
+
+All in all, the config used is pretty standard, although thanks to AMD, no Nvidia-related problems emerged - and I love it.
+
+I didn't manage to get plymouth working so far, so maybe it's worth to investigate this further in the future. For now, I don't mind typing the encrypt password in without any fancy splash screen.
+
+Everything worked out of the box, and I'm satisfied.
+
+### Dotfiles
+
+Some of the files like `.zshenv` and others must be commented out, because nixos can handle things like `cargo` and `node` without a problem.
+
+It's surprisingly satisfying to clone the git repo, execute a script or two and it all just magically starts working; neovim looks and feels amazing, git and others require no hassle whatsoever.
+
+### Screen scaling - addressing the elephant in the room
+
+Due to high DPI of the screen, the raw look is unacceptable and for me personally eye-harming to say the least.
+
+Things to do:
+- Install gnome-tweaks and change `font-size` and/or `scaling`. In my case it was the font;
+- Firefox: go to `about:config` type `devp` and change dpi scaling to whatevery you like - for me it's `1.5`;
+- Vscodium: `zoom` and `font-size`;
+- Obsidian: Same as above. 
+- Other apps: Maybe the `font-size` in gnome-tweaks is too small or the app has it's own saling properties.
+
+### Rebuilding Nixos
+
+With my current config it's laughably easy to change anything and rebuild the system.
+Just use:
+```bash
+# It figures out the machine type on its own
+sudo nixos-rebuild switch --flake .
+```
+or my custom script:
+```bash
+./rebuild
+```

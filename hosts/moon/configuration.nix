@@ -173,6 +173,7 @@
     wget
     curl
     git
+    file
 
     # Languages, compilers and others
     #gnumake
