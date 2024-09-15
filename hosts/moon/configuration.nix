@@ -99,17 +99,22 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       # Applications
-      vscodium
-      obsidian
       gimp
-      #vlc
-      #blender
+      vlc
+      blender
       audacity
       #filezilla
       #krita
-      discord
+      wireshark
+      libreoffice
 
-      # Editors
+      # Communciation
+      discord
+      element-desktop
+
+      # Text editors
+      vscodium
+      obsidian
       alacritty
       tmux
 

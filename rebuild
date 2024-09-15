@@ -8,7 +8,8 @@
 set -e
 
 # Edit current config
-$EDITOR configuration.nix
+HOST=$(hostname)
+$EDITOR hosts/${HOST}/configuration.nix
 
 # cd to the config dir
 pushd /etc/nixos/
