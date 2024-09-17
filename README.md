@@ -291,7 +291,11 @@ It's surprisingly satisfying to clone the git repo, execute a script or two and 
 Due to high DPI of the screen, the raw look is unacceptable and for me personally eye-harming to say the least.
 
 Things to do:
-- Install gnome-tweaks and change `font-size` and/or `scaling`. In my case it was the font;
+- Install gnome.mutter and then execute command:
+    ```bash
+    gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+    ```
+    This enables fractional scaling in the `Display` section of gnome settings. Set this to 1.5 and you're good to go.
 - Firefox: go to `about:config` type `devp` and change dpi scaling to whatevery you like - for me it's `1.5`;
 - Vscodium: `zoom` and `font-size`;
 - Obsidian: Same as above. 

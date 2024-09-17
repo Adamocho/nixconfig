@@ -107,6 +107,8 @@
       #krita
       wireshark
       libreoffice
+      obs-studio
+      inkscape
 
       # Communciation
       discord
@@ -198,6 +200,7 @@
 
     # DE Gnome better looks
     gnome.gnome-tweaks
+    gnome.mutter
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
