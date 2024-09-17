@@ -88,6 +88,14 @@
   documentation.man.enable = true;
   documentation.man.generateCaches = true;
 
+  # Enable dynamic-link libraries...
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    #stdenv.cc.cc.lib
+  ];
+
   # Shell
   programs.zsh.enable = true;
 
@@ -183,7 +191,7 @@
     file
 
     # Languages, compilers and others
-    #gnumake
+    gnumake
     rustup
     rust-analyzer
     python3
