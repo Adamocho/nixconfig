@@ -39,5 +39,17 @@ git commit -am "$current"
 popd
 
 echo "Rebuild finished!"
-notify-send " Rebuild finished" "Last rebuild was carried out successfully!"
+if notify-send --version; then
+    notify-send " Rebuild finished" "Last rebuild was carried out successfully!"
+fi
+
+# Man cache
+read -r -p "Do you want to rebuild man-cache? (y/Ctrl-C) " result
+
+# if [ result = "y" ]; then
+set -x
+sudo mkdir -p /var/cache/man/nixos
+sudo mandb
+echo "Cashes rebuilt!"
+# fi
 

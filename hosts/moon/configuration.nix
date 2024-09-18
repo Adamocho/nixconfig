@@ -7,7 +7,7 @@
       ./hardware-configuration.nix
     ];
 
-  # For the SSD
+  # SSD optimization
   services.fstrim.enable = true;
 
   # Bootloader.
@@ -15,9 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = ["quiet"];
   boot.initrd.luks.devices."luks-eab86c67-aed2-4de4-acf8-0d7011cca2d6".device = "/dev/disk/by-uuid/eab86c67-aed2-4de4-acf8-0d7011cca2d6";
-  networking.hostName = "moon"; # Define your hostname.
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "moon";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -86,7 +84,8 @@
   documentation.enable = true;
   documentation.dev.enable = true;
   documentation.man.enable = true;
-  documentation.man.generateCaches = true;
+  # Takes too long - use the rebuild script instead.
+  #documentation.man.generateCaches = true;
 
   # Enable dynamic-link libraries...
   programs.nix-ld.enable = true;
@@ -111,12 +110,12 @@
       vlc
       blender
       audacity
-      #filezilla
-      #krita
       wireshark
       libreoffice
       obs-studio
       inkscape
+      #filezilla
+      #krita
 
       # Communciation
       discord
@@ -149,7 +148,6 @@
       bacon
       du-dust
       ncspot
-      #rtx
       porsmo
       wiki-tui
       speedtest-rs
@@ -209,6 +207,10 @@
     # DE Gnome better looks
     gnome.gnome-tweaks
     gnome.mutter
+
+    # Manpages
+    man-pages
+    man-pages-posix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
