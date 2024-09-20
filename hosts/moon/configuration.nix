@@ -116,6 +116,8 @@
       inkscape
       #filezilla
       #krita
+      tor-browser
+      calibre
 
       # Communciation
       discord
