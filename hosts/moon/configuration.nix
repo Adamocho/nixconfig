@@ -7,6 +7,27 @@
       ./hardware-configuration.nix
     ];
 
+
+  # DaVinci Resolve patch
+  boot.initrd.kernelModules = ["amdgpu"];
+
+  hardware.opengl.extraPackages = with pkgs; [
+    rocmPackages_5.rocm-runtime
+    rocmPackages_5.rocminfo
+    amdvlk
+    rocmPackages_5.clr.icd
+  ];
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+  systemd.tmpfiles.rules = [
+     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+  ];
+  ## DaVinci patch end
+
+
   # SSD optimization
   services.fstrim.enable = true;
 
@@ -115,7 +136,7 @@
       obs-studio
       inkscape
       #filezilla
-      #krita
+      krita
       tor-browser
       calibre
 
@@ -131,6 +152,7 @@
 
       # Others
       bemenu
+      asciinema
 
       # Terminal tools && just tools.
       htop
@@ -189,6 +211,9 @@
     curl
     git
     file
+
+    # Testing location
+    davinci-resolve
 
     # Languages, compilers and others
     gnumake
@@ -269,3 +294,4 @@
   # Flakes!!
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
+

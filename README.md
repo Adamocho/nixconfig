@@ -301,6 +301,35 @@ Things to do:
 - Obsidian: Same as above. 
 - Other apps: Maybe the `font-size` in gnome-tweaks is too small or the app has it's own saling properties.
 
+### Getting DaVinci Resolve to work properly (gpu detection problem)
+
+Just as described, davinci launches and asks to select a GPU, because none was found.
+The fix is below - found it [here](https://discourse.nixos.org/t/davinci-resolve-studio-install-issues/37699/63).
+It just took 3 hours to find a fix for it =).
+
+```nix
+# configuration.nix
+
+ boot = {
+    initrd.kernelModules = ["amdgpu"];
+  };
+  # Usually some other configuration...
+  hardware.opengl.extraPackages = with pkgs; [
+    rocmPackages_5.rocm-runtime
+    rocmPackages_5.rocminfo
+    amdvlk
+    rocmPackages_5.clr.icd
+  ];
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+  systemd.tmpfiles.rules = [
+     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+  ];
+```
+
 ### Rebuilding Nixos
 
 With my current config it's laughably easy to change anything and rebuild the system.
