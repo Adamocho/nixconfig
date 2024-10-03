@@ -2,6 +2,19 @@
 
 ## Setup from scratch (without repo cloning)
 
+### Rebuilding Nixos
+
+With my current config it's laughably easy to change anything and rebuild the system.
+Just use:
+```bash
+# It figures out the machine type on its own
+sudo nixos-rebuild switch --flake .
+```
+or my custom script:
+```bash
+./rebuild
+```
+
 ### Base install
 
 1. Install from CD/USB
@@ -267,6 +280,24 @@ It solved the issue in my case.
 
 Rebuild. Test. Rollback, should you need it.
 
+### Command line github authentication
+
+Temporarily install `gh` on your system
+
+```bash
+nix-shell -p gh
+# Installing github..
+# Done (shell change)
+
+
+gh auth login
+# Enter your cridentials or fetch them from your .gitconfig
+# Login using token or browser
+# Done. Gh not needed
+
+exit
+```
+And you're set. Happy force pushing!
 
 ## Laptop setup
 
@@ -330,15 +361,3 @@ It just took 3 hours to find a fix for it =).
   ];
 ```
 
-### Rebuilding Nixos
-
-With my current config it's laughably easy to change anything and rebuild the system.
-Just use:
-```bash
-# It figures out the machine type on its own
-sudo nixos-rebuild switch --flake .
-```
-or my custom script:
-```bash
-./rebuild
-```
