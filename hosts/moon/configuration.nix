@@ -7,13 +7,10 @@
       ./hardware-configuration.nix
     ];
 
-
-  # DaVinci Resolve patch
+  ## DaVinci patch START
   boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.opengl.extraPackages = with pkgs; [
-    rocmPackages_5.rocm-runtime
-    rocmPackages_5.rocminfo
     amdvlk
     rocmPackages_5.clr.icd
   ];
@@ -25,8 +22,7 @@
   systemd.tmpfiles.rules = [
      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
   ];
-  ## DaVinci patch end
-
+  ## DaVinci patch END
 
   # SSD optimization
   services.fstrim.enable = true;
