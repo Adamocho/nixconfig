@@ -11,7 +11,7 @@
   boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
+    #amdvlk
     rocmPackages_5.clr.icd
   ];
   hardware.opengl = {
@@ -119,7 +119,7 @@
   users.users.adam = {
     isNormalUser = true;
     description = "Adam";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       # Applications
@@ -208,7 +208,6 @@
     git
     file
 
-    # Testing location
     davinci-resolve
 
     # Languages, compilers and others
@@ -234,6 +233,10 @@
     # Manpages
     man-pages
     man-pages-posix
+
+    # VPN
+    #gnome.networkmanager-fortisslvpn
+    #openfortivpn
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -244,6 +247,10 @@
     enableSSHSupport = true;
   };
   # List services that you want to enable:
+
+    
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
