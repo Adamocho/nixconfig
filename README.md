@@ -15,6 +15,14 @@ or my custom script:
 ./rebuild
 ```
 
+### Delete old generations
+
+To free up some space on disk, use:
+
+```bash
+sudo nix-collect-garbage -d
+```
+
 ### Base install
 
 1. Install from CD/USB

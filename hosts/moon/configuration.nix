@@ -7,22 +7,27 @@
       ./hardware-configuration.nix
     ];
 
-  ## DaVinci patch START
+  ## DaVinci/Chromium patch START
   boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.opengl.extraPackages = with pkgs; [
-    #amdvlk
+    libvdpau
+    vaapiVdpau
+    amdvlk
     rocmPackages_5.clr.icd
+    driversi686Linux.amdvlk # To enable Vulkan support for 32-bit applications.
   ];
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
   };
+
   systemd.tmpfiles.rules = [
      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
   ];
-  ## DaVinci patch END
+  ## Patch END
 
   # SSD optimization
   services.fstrim.enable = true;
@@ -208,7 +213,7 @@
     git
     file
 
-    davinci-resolve
+    #davinci-resolve
 
     # Languages, compilers and others
     gnumake
@@ -234,9 +239,16 @@
     man-pages
     man-pages-posix
 
+    # graphics
+    vulkan-tools
+    mesa
+
     # VPN
     #gnome.networkmanager-fortisslvpn
     #openfortivpn
+
+    # Firmware update
+    fwupd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -284,7 +296,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release of the installed version.
   # Before changing this value read the documentation for this option
