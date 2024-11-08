@@ -176,6 +176,7 @@
       porsmo
       wiki-tui
       speedtest-rs
+      sccache
     ];
   };
 
