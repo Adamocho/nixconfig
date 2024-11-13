@@ -39,6 +39,17 @@
   boot.initrd.luks.devices."luks-eab86c67-aed2-4de4-acf8-0d7011cca2d6".device = "/dev/disk/by-uuid/eab86c67-aed2-4de4-acf8-0d7011cca2d6";
   networking.hostName = "moon";
 
+  # System Emulation
+  boot.binfmt.emulatedSystems = [
+    # If needed (by crosscompiling)
+    "x86_64-windows"
+    #"riscv32-linux"
+    #"riscv64-linux"
+    #"wasm32-wasi"
+    #"wasm64-wasi"
+    #"aarch64-linux"
+  ];
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
