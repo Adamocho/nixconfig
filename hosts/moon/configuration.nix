@@ -33,6 +33,7 @@
   services.fstrim.enable = true;
 
   # Bootloader.
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = ["quiet"];
@@ -42,9 +43,9 @@
   # System Emulation
   boot.binfmt.emulatedSystems = [
     # If needed (by crosscompiling)
-    "x86_64-windows"
+    # "x86_64-windows"
     #"riscv32-linux"
-    #"riscv64-linux"
+    # "riscv64-linux"
     #"wasm32-wasi"
     #"wasm64-wasi"
     #"aarch64-linux"
@@ -125,7 +126,7 @@
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
-    #stdenv.cc.cc.lib
+    stdenv.cc.cc.lib
   ];
 
   # Shell
@@ -153,10 +154,10 @@
       calibre
 
       # Communciation
-      discord
-      element-desktop
+      #discord
+      #element-desktop
 
-      # Text editors
+      # Text editors and others
       vscodium
       obsidian
       alacritty
@@ -165,6 +166,10 @@
       # Others
       bemenu
       asciinema
+      magic-wormhole
+
+      # Gnome
+      gnomeExtensions.just-perfection
 
       # Terminal tools && just tools.
       htop
@@ -216,27 +221,34 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
     wget
     git
     tree
     wget
     curl
-    git
     file
 
-    #davinci-resolve
+    # openssl
+    # libressl_3_8
+    # openssl_legacy
+    trunk 
+    # clangMultiStdenv
+    # gccMultiStdenv
+
 
     # Languages, compilers and others
     gnumake
+    cmake
     rustup
     rust-analyzer
     python3
     musl
     clang
-    libgcc
+    # gcc
+    # libgcc
     #ghc
-    #pkg-config
+    # pkg-config
+    # pkg-config-unwrapped
     nodejs_22
 
     # For neovim-treesitter
@@ -276,33 +288,8 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  # # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-  #
-  # # Turn something else off 
-  # services.power-profiles-daemon.enable = false;
-  #
-  # # Power settings
-  # services.tlp = {
-  #   enable = true;
-  #   settings = {
-  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
-  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-  #
-  #     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-  #
-  #     CPU_MIN_PERF_ON_AC = 0;
-  #     CPU_MAX_PERF_ON_AC = 100;
-  #     CPU_MIN_PERF_ON_BAT = 0;
-  #     CPU_MAX_PERF_ON_BAT = 50;
-  #
-  #    #Optional helps save long term battery health
-  #    START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-  #    STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-  #
-  #   };
-  # };
+  # Enable the OpenSSH daemon.
+  #services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
