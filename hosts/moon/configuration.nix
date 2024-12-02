@@ -1,5 +1,5 @@
 # Help is available in the configuration.nix(5) man page
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -43,12 +43,6 @@
   # System Emulation
   boot.binfmt.emulatedSystems = [
     # If needed (by crosscompiling)
-    # "x86_64-windows"
-    #"riscv32-linux"
-    # "riscv64-linux"
-    #"wasm32-wasi"
-    #"wasm64-wasi"
-    #"aarch64-linux"
   ];
 
   # Configure network proxy if necessary
@@ -228,13 +222,8 @@
     curl
     file
 
-    # openssl
-    # libressl_3_8
-    # openssl_legacy
+    # Rust Yew
     trunk 
-    # clangMultiStdenv
-    # gccMultiStdenv
-
 
     # Languages, compilers and others
     gnumake
@@ -244,11 +233,6 @@
     python3
     musl
     clang
-    # gcc
-    # libgcc
-    #ghc
-    # pkg-config
-    # pkg-config-unwrapped
     nodejs_22
 
     # For neovim-treesitter
@@ -266,10 +250,6 @@
     # graphics
     vulkan-tools
     mesa
-
-    # VPN
-    #gnome.networkmanager-fortisslvpn
-    #openfortivpn
 
     # Firmware update
     fwupd
