@@ -168,7 +168,6 @@
       # Terminal tools && just tools.
       htop
       plocate
-      cron
       binwalk
       strace
       ltrace
@@ -178,6 +177,7 @@
       unzip
 
       # Special rust tools.
+      fd
       bat
       ripgrep
       bacon
@@ -223,7 +223,14 @@
     file
 
     # Rust Yew
-    trunk 
+    #trunk 
+    pkg-config
+    pkg-config-unwrapped
+    openssl
+    libressl_3_8
+    openssl_legacy
+    clangMultiStdenv
+    gccMultiStdenv
 
     # Languages, compilers and others
     gnumake
@@ -264,6 +271,13 @@
   };
   # List services that you want to enable:
 
+  # Enable cron service
+  services.cron = {
+    enable = true;
+    # systemCronJobs = [
+    #   "*/5 * * * *      root    date >> /tmp/cron.log"
+    # ];
+  };
     
   # Enable docker
   virtualisation.docker.enable = true;
