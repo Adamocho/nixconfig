@@ -10,7 +10,7 @@
   ## DaVinci/Chromium patch START
   boot.initrd.kernelModules = ["amdgpu"];
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     libvdpau
     vaapiVdpau
     amdvlk
@@ -18,10 +18,10 @@
     driversi686Linux.amdvlk # To enable Vulkan support for 32-bit applications.
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    #driSupport = true;
+    enable32Bit = true;
   };
 
   systemd.tmpfiles.rules = [
@@ -247,8 +247,8 @@
     tree-sitter
 
     # DE Gnome better looks
-    gnome.gnome-tweaks
-    gnome.mutter
+    gnome-tweaks
+    mutter
 
     # Manpages
     man-pages
