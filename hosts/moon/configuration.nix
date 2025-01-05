@@ -40,6 +40,10 @@
   boot.initrd.luks.devices."luks-eab86c67-aed2-4de4-acf8-0d7011cca2d6".device = "/dev/disk/by-uuid/eab86c67-aed2-4de4-acf8-0d7011cca2d6";
   networking.hostName = "moon";
 
+  environment.sessionVariables = rec {
+    GSK_RENDERER = "gl";
+  };
+
   # System Emulation
   boot.binfmt.emulatedSystems = [
     # If needed (by crosscompiling)
