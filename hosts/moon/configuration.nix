@@ -166,6 +166,11 @@
       asciinema
       magic-wormhole
 
+      # Do not ask
+      haskellPackages.haskell-language-server
+      ghc
+      stack
+
       # Gnome
       gnomeExtensions.just-perfection
 
@@ -244,7 +249,7 @@
     python3
     musl
     clang
-    nodejs_22
+    nodejs_20
 
     # For neovim-treesitter
     vimPlugins.nvim-treesitter.withAllGrammars
@@ -261,6 +266,9 @@
     # graphics
     vulkan-tools
     mesa
+
+    # power management
+    powertop
 
     # Firmware update
     fwupd
