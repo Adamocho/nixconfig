@@ -33,7 +33,7 @@
   services.fstrim.enable = true;
 
   # Bootloader.
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.configurationLimit = 15;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = ["quiet"];
@@ -290,7 +290,12 @@
     #   "*/5 * * * *      root    date >> /tmp/cron.log"
     # ];
   };
-    
+
+  # Enable plocate database
+  services.locate.enable = true;
+  services.locate.package = pkgs.plocate;
+  services.locate.interval = "weekly";
+
   # Enable docker
   virtualisation.docker.enable = true;
 
