@@ -295,6 +295,7 @@
   services.locate.enable = true;
   services.locate.package = pkgs.plocate;
   services.locate.interval = "weekly";
+  services.locate.localuser = null;
 
   # Enable docker
   virtualisation.docker.enable = true;
