@@ -156,6 +156,7 @@
       #element-desktop
 
       # Text editors and others
+      jetbrains.idea-ultimate
       vscodium
       obsidian
       alacritty
@@ -299,6 +300,12 @@
 
   # Enable docker
   virtualisation.docker.enable = true;
+
+  # Enable virt-manager for KVM
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["adam"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Enable the OpenSSH daemon.
   #services.openssh.enable = true;
