@@ -268,11 +268,8 @@
     vulkan-tools
     mesa
 
-    # power management
+    # battery management + service below
     powertop
-
-    # Firmware update
-    fwupd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -283,6 +280,13 @@
     enableSSHSupport = true;
   };
   # List services that you want to enable:
+
+  # firmware updates
+  services.fwupd.enable = true;
+
+  # powertop powerManagement
+  powerManagement.powertop.enable = true;
+  powerManagement.cpuFreqGovernor = "performance";
 
   # Enable cron service
   services.cron = {
