@@ -162,8 +162,10 @@
       alacritty
       tmux
 
+      # launchers
+      rofi
+
       # Others
-      bemenu
       asciinema
       magic-wormhole
 
@@ -279,7 +281,8 @@
     enable = true;
     enableSSHSupport = true;
   };
-  # List services that you want to enable:
+
+  # List services that you want to enable #
 
   # firmware updates
   services.fwupd.enable = true;
