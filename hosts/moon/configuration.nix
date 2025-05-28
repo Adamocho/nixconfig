@@ -1,5 +1,5 @@
 # Help is available in the configuration.nix(5) man page
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports =
@@ -134,7 +134,7 @@
   users.users.adam = {
     isNormalUser = true;
     description = "Adam";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ]; # "docker"
     shell = pkgs.zsh;
     packages = with pkgs; [
       # Applications
@@ -167,7 +167,7 @@
 
       # Others
       asciinema
-      magic-wormhole
+      magic-wormhole-rs
 
       # Do not ask
       haskellPackages.haskell-language-server
@@ -201,6 +201,13 @@
       sccache
     ];
   };
+
+  # home-manager = {
+  #   extraSpecialArgs = { inherit inputs; };
+  #   users = {
+  #     "adam" = import ./home.nix;
+  #   };
+  # };
 
   # Configure additional fonts
   fonts.packages = with pkgs; [
@@ -272,6 +279,9 @@
 
     # battery management + service below
     powertop
+
+    # dotfiles management
+    home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -306,7 +316,7 @@
   services.locate.localuser = null;
 
   # Enable docker
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
   # Enable virt-manager for KVM
   programs.virt-manager.enable = true;
