@@ -14,7 +14,7 @@
     libvdpau
     vaapiVdpau
     amdvlk
-    rocmPackages_5.clr.icd
+    rocmPackages.clr
     driversi686Linux.amdvlk # To enable Vulkan support for 32-bit applications.
   ];
 
@@ -25,7 +25,7 @@
   };
 
   systemd.tmpfiles.rules = [
-     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
   ## Patch END
 
@@ -94,7 +94,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -313,7 +313,6 @@
   services.locate.enable = true;
   services.locate.package = pkgs.plocate;
   services.locate.interval = "weekly";
-  services.locate.localuser = null;
 
   # Enable docker
   #virtualisation.docker.enable = true;
