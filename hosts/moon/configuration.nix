@@ -41,13 +41,13 @@
   networking.hostName = "moon";
 
   environment.sessionVariables = rec {
-    GSK_RENDERER = "gl";
+    #GSK_RENDERER = "gl";
 
     # Against invisible cursors
     #WLR_NO_HARDWARE_CURSORS = 1;
 
     # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = 0;
+    #NIXOS_OZONE_WL = 0;
 
     # This is saddly a must
     EDITOR = "nvim";
@@ -55,7 +55,7 @@
 
     # Firefox please work!
     #XDG_CURRENT_DESKTOP = "river";
-    MOZ_ENABLE_WAYLAND = 1;
+    #MOZ_ENABLE_WAYLAND = 1;
   };
 
   # System Emulation
