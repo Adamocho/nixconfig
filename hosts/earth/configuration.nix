@@ -82,8 +82,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -224,7 +223,7 @@
 
   # Nvidia wayland config continuation
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia.modesetting.enable = true;
   };
 
@@ -274,7 +273,7 @@
     font-awesome
     
     # File manager
-    gnome.nautilus
+    nautilus
     #rox-filer
 
     # Printer management
