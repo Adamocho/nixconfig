@@ -42,6 +42,20 @@
 
   environment.sessionVariables = rec {
     GSK_RENDERER = "gl";
+
+    # Against invisible cursors
+    WLR_NO_HARDWARE_CURSORS = 1;
+
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = 0;
+
+    # This is saddly a must
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+
+    # Firefox please work!
+    #XDG_CURRENT_DESKTOP = "river";
+    MOZ_ENABLE_WAYLAND = 1;
   };
 
   # System Emulation
@@ -240,6 +254,7 @@
     wget
     curl
     file
+    firefox
 
     # Rust Yew
     #trunk 
@@ -299,7 +314,7 @@
 
   # powertop powerManagement
   powerManagement.powertop.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
+  # powerManagement.cpuFreqGovernor = "performance";
 
   # Enable cron service
   services.cron = {
