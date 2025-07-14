@@ -108,7 +108,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -314,7 +314,7 @@
 
   # powertop powerManagement
   powerManagement.powertop.enable = true;
-  # powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "performance";
 
   # Enable cron service
   services.cron = {
