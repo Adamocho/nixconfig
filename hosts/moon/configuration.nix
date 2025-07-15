@@ -133,6 +133,9 @@
   # Takes too long - use the rebuild script instead.
   #documentation.man.generateCaches = true;
 
+  # Optimise store automatically - saves disk space
+  nix.settings.auto-optimise-store = true;
+
   # Enable dynamic-link libraries...
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
