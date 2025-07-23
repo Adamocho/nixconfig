@@ -131,7 +131,7 @@
   documentation.dev.enable = true;
   documentation.man.enable = true;
   # Takes too long - use the rebuild script instead.
-  #documentation.man.generateCaches = true;
+  documentation.man.generateCaches = true;
 
   # Optimise store automatically - saves disk space
   nix.settings.auto-optimise-store = true;
@@ -216,6 +216,9 @@
       wiki-tui
       speedtest-rs
       sccache
+
+      # games
+      gzdoom
     ];
   };
 
@@ -316,8 +319,11 @@
   services.fwupd.enable = true;
 
   # powertop powerManagement
-  powerManagement.powertop.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
+  # powerManagement.powertop.enable = true;
+  # powerManagement.cpuFreqGovernor = "performance";
+
+  # Supposedly helps on Framework 13
+  services.power-profiles-daemon.enable = true;
 
   # Enable cron service
   services.cron = {
