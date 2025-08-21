@@ -10,19 +10,20 @@
   ## DaVinci/Chromium patch START
   boot.initrd.kernelModules = ["amdgpu"];
 
+  hardware.graphics = {
+    enable = true;
+    #driSupport = true;
+    enable32Bit = true;
+  };
+
   hardware.graphics.extraPackages = with pkgs; [
     libvdpau
     vaapiVdpau
     amdvlk
     rocmPackages.clr
     driversi686Linux.amdvlk # To enable Vulkan support for 32-bit applications.
+    mesa.opencl # Enables Rusticl (OpenCL) support
   ];
-
-  hardware.graphics = {
-    enable = true;
-    #driSupport = true;
-    enable32Bit = true;
-  };
 
   systemd.tmpfiles.rules = [
      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -42,6 +43,7 @@
 
   environment.sessionVariables = rec {
     GSK_RENDERER = "gl";
+    RUSTICL_ENABLE = "radeonsi";
 
     # Against invisible cursors
     WLR_NO_HARDWARE_CURSORS = 1;
@@ -54,8 +56,8 @@
     VISUAL = "nvim";
 
     # Firefox please work!
-    XDG_CURRENT_DESKTOP = "river";
-    MOZ_ENABLE_WAYLAND = 1;
+    # XDG_CURRENT_DESKTOP = "river";
+    # MOZ_ENABLE_WAYLAND = 1;
   };
 
   # System Emulation
@@ -108,7 +110,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -167,6 +169,7 @@
       krita
       tor-browser
       calibre
+      davinci-resolve
 
       # Communciation
       #discord
@@ -216,9 +219,6 @@
       wiki-tui
       speedtest-rs
       sccache
-
-      # games
-      gzdoom
     ];
   };
 
@@ -264,13 +264,13 @@
 
     # Rust Yew
     #trunk 
-    pkg-config
-    pkg-config-unwrapped
-    openssl
-    libressl_3_8
-    openssl_legacy
-    clangMultiStdenv
-    gccMultiStdenv
+    # pkg-config
+    # pkg-config-unwrapped
+    # openssl
+    # libressl_3_8
+    # openssl_legacy
+    # clangMultiStdenv
+    # gccMultiStdenv
 
     # Languages, compilers and others
     gnumake
@@ -342,10 +342,10 @@
   #virtualisation.docker.enable = true;
 
   # Enable virt-manager for KVM
-  programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["adam"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  #programs.virt-manager.enable = true;
+  #users.groups.libvirtd.members = ["adam"];
+  #virtualisation.libvirtd.enable = true;
+  #virtualisation.spiceUSBRedirection.enable = true;
 
   # Enable the OpenSSH daemon.
   #services.openssh.enable = true;
