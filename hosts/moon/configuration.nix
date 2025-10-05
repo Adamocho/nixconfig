@@ -177,6 +177,7 @@
 
       # Text editors and others
       jetbrains.idea-ultimate
+      jetbrains.pycharm-community
       vscodium
       obsidian
       alacritty
