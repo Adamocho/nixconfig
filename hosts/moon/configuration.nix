@@ -172,7 +172,7 @@
       davinci-resolve
 
       # Communciation
-      #discord
+      discord
       #element-desktop
 
       # Text editors and others
