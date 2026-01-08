@@ -33,4 +33,6 @@
   ];
 
   system.stateVersion = "24.05";
+  # Flakes!!
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
