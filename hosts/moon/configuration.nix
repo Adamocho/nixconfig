@@ -7,8 +7,8 @@
       ./hardware-configuration.nix
     ];
 
-  ## DaVinci/Chromium patch START
-  boot.initrd.kernelModules = ["amdgpu"];
+  # DaVinci/Chromium patch START
+  #boot.initrd.kernelModules = ["amdgpu"];
 
   hardware.graphics = {
     enable = true;
