@@ -18,10 +18,8 @@
 
   hardware.graphics.extraPackages = with pkgs; [
     libvdpau
-    vaapiVdpau
-    amdvlk
+    libva-vdpau-driver
     rocmPackages.clr
-    driversi686Linux.amdvlk # To enable Vulkan support for 32-bit applications.
     mesa.opencl # Enables Rusticl (OpenCL) support
   ];
 
@@ -49,15 +47,11 @@
     WLR_NO_HARDWARE_CURSORS = 1;
 
     # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = 0;
+    NIXOS_OZONE_WL = 1;
 
     # This is saddly a must
     EDITOR = "nvim";
     VISUAL = "nvim";
-
-    # Firefox please work!
-    # XDG_CURRENT_DESKTOP = "river";
-    # MOZ_ENABLE_WAYLAND = 1;
   };
 
   # System Emulation
@@ -94,8 +88,14 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Enable Hyprland
+  programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
+  programs.hyprland.xwayland.enable = true;
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -170,15 +170,16 @@
       tor-browser
       calibre
       davinci-resolve
+      keepassxc
 
       # Communciation
       discord
       #element-desktop
 
       # Text editors and others
-      jetbrains.idea-ultimate
-      jetbrains.pycharm-community
-      vscodium
+      jetbrains.idea
+      jetbrains.pycharm
+      vscode
       obsidian
       alacritty
       tmux
@@ -214,7 +215,7 @@
       bat
       ripgrep
       bacon
-      du-dust
+      dust
       ncspot
       porsmo
       wiki-tui
@@ -363,7 +364,7 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   # Auto upgrades... this is Nixos, so it won't hurt anyway
-  #system.autoUpgrade.enable = true; 
+  system.autoUpgrade.enable = true; 
 
   # Flakes!!
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

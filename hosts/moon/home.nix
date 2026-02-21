@@ -62,4 +62,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # make sure UWSM does not conflict with home-manager
+  wayland.windowManager.hyprland.systemd.enable = false;
 }
