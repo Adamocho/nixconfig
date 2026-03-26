@@ -209,6 +209,8 @@
       stow
       #pavucontrol
       unzip
+      pandoc
+      wkhtmltopdf
 
       # Special rust tools.
       fd
@@ -283,6 +285,8 @@
     musl
     clang
     nodejs_20
+    unity-test
+    gcc
 
     # For neovim-treesitter
     vimPlugins.nvim-treesitter.withAllGrammars
